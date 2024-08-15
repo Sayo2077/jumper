@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Collections.LowLevel.Unsafe;
 using UnityEngine;
 
 public class MoveChar : MonoBehaviour
@@ -11,6 +12,7 @@ public class MoveChar : MonoBehaviour
     public float CheckJump;
     public float CheckMove;
     public float TakePunch;
+    private float number;
     private Rigidbody2D rb;
     private Animator amt;
     // Start is called before the first frame update
@@ -27,13 +29,13 @@ public class MoveChar : MonoBehaviour
         if (Input.GetKey(KeyCode.RightArrow) && TakePunch == 0 )
         {
             rb.velocity = new Vector2(Input.GetAxis("Horizontal") * speed, rb.velocity.y);
-            transform.localScale = new Vector2(3, 3);
+            transform.localScale = new Vector2(5, 5);
             MoveHuman = 1;
         }
-        else if (Input.GetKey(KeyCode.LeftArrow) && TakePunch == 0)
+        else if (Input.GetKey(KeyCode.LeftArrow) && TakePunch == 0 )
         {
             rb.velocity = new Vector2(Input.GetAxis("Horizontal") * speed, rb.velocity.y);
-            transform.localScale = new Vector2(-3, 3);
+            transform.localScale = new Vector2(-5, 5);
             MoveHuman = -1;
         }
         else
@@ -75,11 +77,13 @@ public class MoveChar : MonoBehaviour
     //Target Human
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        //Target Sand
         if (collision.gameObject.CompareTag("Sand"))
         {
             CheckJump = 0;
             TakePunch = 0;
         }
+        //Target Rotation
         if (collision.gameObject.CompareTag("Rotation"))
         {
             Hp--;

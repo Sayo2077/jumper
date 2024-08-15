@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Sand
   - Rotation
+  - Up Jump
   layers:
   - Default
   - TransparentFX
