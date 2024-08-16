@@ -7,6 +7,8 @@ TagManager:
   - Sand
   - Rotation
   - Up Jump
+  - Gai
+  - Nhan
   layers:
   - Default
   - TransparentFX

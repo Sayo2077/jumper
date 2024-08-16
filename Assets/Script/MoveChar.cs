@@ -2,10 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.Collections.LowLevel.Unsafe;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MoveChar : MonoBehaviour
 {
-    public float Hp = 3;
+    public float Hp = 1;
     public float MoveHuman;
     public float speed;
     public float MoveHigh;
@@ -25,6 +26,7 @@ public class MoveChar : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Die();
         //Move L,R,U
         if (Input.GetKey(KeyCode.RightArrow) && TakePunch == 0 )
         {
@@ -87,8 +89,20 @@ public class MoveChar : MonoBehaviour
         if (collision.gameObject.CompareTag("Rotation"))
         {
             Hp--;
-            rb.velocity = new Vector2(Input.GetAxis("Horizontal") * -5, 5);
+         //   rb.velocity = new Vector2(Input.GetAxis("Horizontal") * -5, 5);
             TakePunch = 1;
+        }
+        if (collision.gameObject.CompareTag("Gai"))
+        {
+            Hp--;
+        }
+    }
+    private void Die()
+    {
+        if(Hp < 1)
+        {
+            SceneManager.LoadScene(2);
+            Hp = 1;
         }
     }
 
